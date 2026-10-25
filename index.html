@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oracle Red Bull Racing</title>
+  
+  <!-- Font Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a1224;
+      --bg-card: #121e36;
+      --redbull-red: #e10600;
+      --redbull-yellow: #ffcc00;
+      --text-white: #ffffff;
+      --text-gray: #a0aec0;
+      --border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 8%;
+      background: rgba(10, 18, 36, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: var(--text-gray);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--redbull-yellow);
+    }
+
+    /* HERO SECTION DENGAN VIDEO BACKGROUND */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-color: #0a1224;
+    }
+
+    #hero-bg-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(10, 18, 36, 0.4) 0%,
+        rgba(10, 18, 36, 0.85) 100%
+      );
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(225, 6, 0, 0.2);
+      border: 1px solid var(--redbull-red);
+      color: var(--redbull-yellow);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 .highlight {
+      color: var(--redbull-red);
+    }
+
+    .hero-content p {
+      color: var(--text-gray);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--redbull-red);
+      color: var(--text-white);
+      margin-right: 15px;
+    }
+
+    .btn-primary:hover {
+      background: #b50500;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-white);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-white);
+      transform: translateY(-2px);
+    }
+
+    /* SECTION COMMON */
+    .section {
+      padding: 100px 8%;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-gray);
+      margin-bottom: 60px;
+    }
+
+    /* DRIVERS SECTION */
+    .drivers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .driver-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .driver-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--redbull-red);
+    }
+
+    .driver-img-container {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(180deg, rgba(0,43,102,0.3) 0%, rgba(10,18,36,0.9) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .driver-img-container img {
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .driver-info {
+      padding: 25px;
+    }
+
+    .driver-number {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--redbull-yellow);
+      line-height: 1;
+    }
+
+    .driver-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin: 8px 0;
+    }
+
+    .driver-role {
+      color: var(--text-gray);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .driver-stats {
+      list-style: none;
+      border-top: 1px solid var(--border-color);
+      padding-top: 15px;
+    }
+
+    .driver-stats li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .driver-stats span {
+      color: var(--text-gray);
+    }
+
+    /* CAR TECH SECTION */
+    .car-showcase {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .car-showcase img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .car-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 25px;
+      border-radius: 10px;
+    }
+
+    .feature-box h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--redbull-yellow);
+      margin-bottom: 10px;
+    }
+
+    .feature-box p {
+      color: var(--text-gray);
+      font-size: 0.95rem;
+    }
+
+    /* HISTORY TIMELINE */
+    .timeline {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      border-left: 2px solid var(--redbull-red);
+      padding-left: 30px;
+    }
+
+    .timeline-item {
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -36px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--redbull-yellow);
+    }
+
+    .timeline-year {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: var(--redbull-yellow);
+      font-size: 1.2rem;
+    }
+
+    .timeline-title {
+      font-weight: 700;
+      margin: 5px 0;
+    }
+
+    .timeline-desc {
+      color: var(--text-gray);
+      font-size: 0.95rem;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 40px 8%;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-gray);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.3rem;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="#home">
+        <img src="https://brandlogos.net/wp-content/uploads/2022/05/oracle_red_bull_racing-logo_brandlogos.net_ktyln.png" alt="Oracle Red Bull Racing Logo">
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Beranda</a></li>
+      <li><a href="#drivers">Pembalap</a></li>
+      <li><a href="#car">Bedah Mobil</a></li>
+      <li><a href="#history">Sejarah</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECTION HERO DENGAN VIDEO BACKGROUND -->
+  <section class="hero" id="home">
+    <video autoplay muted loop playsinline preload="auto" id="hero-bg-video">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-formula-one-car-driving-on-a-track-40890-large.mp4" type="video/mp4">
+      Browser Anda tidak mendukung video.
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="badge">Oracle Red Bull Racing</span>
+      <h1>KECEPATAN.<br><span class="highlight">INOVASI.</span> DOMINASI.</h1>
+      <p>
+        Menyelami era keemasan Formula 1 bersama sang Juara Dunia Max Verstappen 
+        dan talenta masa depan Isack Hadjar.
+      </p>
+      <div class="hero-buttons">
+        <a href="#drivers" class="btn btn-primary">Lihat Driver</a>
+        <a href="#car" class="btn btn-secondary">Bedah Mobil</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION PEMBALAP -->
+  <section class="section" id="drivers">
+    <h2 class="section-title">LINE-UP PEMBALAP</h2>
+    <p class="section-subtitle">Kombinasi pengalaman Juara Dunia dan ambisi talenta muda</p>
+    
+    <div class="drivers-grid">
+      <!-- Max Verstappen -->
+      <div class="driver-card">
+        <div class="driver-img-container">
+          <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=500&auto=format&fit=crop&q=60" alt="Max Verstappen">
+        </div>
+        <div class="driver-info">
+          <div class="driver-number">#1</div>
+          <h3 class="driver-name">Max Verstappen</h3>
+          <p class="driver-role">Pembalap Utama / Juara Dunia F1</p>
+          <ul class="driver-stats">
+            <li><span>Kewarganegaraan</span> <strong>Belanda</strong></li>
+            <li><span>Gelar Juara Dunia</span> <strong>4 Kali (2021-2024)</strong></li>
+            <li><span>Kemenangan Seri</span> <strong>60+ Podium Utama</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Isack Hadjar -->
+      <div class="driver-card">
+        <div class="driver-img-container">
+          <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500&auto=format&fit=crop&q=60" alt="Isack Hadjar">
+        </div>
+        <div class="driver-info">
+          <div class="driver-number">#6</div>
+          <h3 class="driver-name">Isack Hadjar</h3>
+          <p class="driver-role">Pembalap Red Bull Racing</p>
+          <ul class="driver-stats">
+            <li><span>Kewarganegaraan</span> <strong>Prancis</strong></li>
+            <li><span>Latar Belakang</span> <strong>Red Bull Junior Team</strong></li>
+            <li><span>Status</span> <strong>Bintang Masa Depan F1</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION BEDAH MOBIL -->
+  <section class="section" id="car">
+    <h2 class="section-title">BEDAH AERO MOBIL F1</h2>
+    <p class="section-subtitle">Detail teknis utama yang mudah dipahami audience awam</p>
+
+    <!-- Tampilan Mobil RB -->
+    <div class="car-showcase">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1000&auto=format&fit=crop&q=60" alt="Red Bull F1 Car">
+      <h3 style="font-family: 'Montserrat', sans-serif; color: var(--redbull-yellow); margin-bottom: 5px;">Oracle RB Series Chassis</h3>
+      <p style="color: var(--text-gray); font-size: 0.95rem;">Mahakarya aerodinamika yang dirancang untuk kecepatan maksimum dan efisiensi optimal di tikungan.</p>
+    </div>
+
+    <div class="car-features">
+      <div class="feature-box">
+        <h3>1. Front Wing (Sayap Depan)</h3>
+        <p>Membelah angin dari depan dan mengarahkan aliran udara ke seluruh bagian mobil agar tetap menempel di lintasan.</p>
+      </div>
+      <div class="feature-box">
+        <h3>2. Halo Protection</h3>
+        <p>Rangka titanium di atas kokpit yang melindungi kepala pembalap dari benturan keras atau serpihan benda tajam.</p>
+      </div>
+      <div class="feature-box">
+        <h3>3. DRS (Rear Wing flap)</h3>
+        <p>Sayap belakang yang bisa terbuka otomatis di trek lurus untuk mengurangi hambatan angin dan menambah kecepatan saat menyalip.</p>
+      </div>
+      <div class="feature-box">
+        <h3>4. Power Unit Hybrid</h3>
+        <p>Mesin V6 Turbo 1.6 Liter yang dipadukan dengan motor listrik ramah lingkungan, menghasilkan tenaga hingga 1.000+ HP.</p>
+      </div>
+      <div class="feature-box">
+        <h3>5. Underfloor & Diffuser</h3>
+        <p>Lantai bawah mobil yang menyedot angin untuk menciptakan efek hisap (Ground Effect) agar mobil stabil di tikungan cepat.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION SEJARAH -->
+  <section class="section" id="history">
+    <h2 class="section-title">SEJARAH TIM</h2>
+    <p class="section-subtitle">Perjalanan dari pendatang baru hingga menjadi penguasa Formula 1</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">2005</div>
+        <div class="timeline-title">Awal Berdiri</div>
+        <div class="timeline-desc">Red Bull resmi mengambil alih tim Jaguar Racing dan memulai debutnya di Formula 1.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2010 - 2013</div>
+        <div class="timeline-title">Era Kejayaan Pertama</div>
+        <div class="timeline-desc">Mendominasi F1 bersama Sebastian Vettel dengan meraih 4 Gelar Juara Dunia berturut-turut.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2021 - Sekarang</div>
+        <div class="timeline-title">Era Dominasi Max Verstappen</div>
+        <div class="timeline-desc">Menguasai kompetisi modern F1 dan mencetak rekor kemenangan terbanyak dalam satu musim balap.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Oracle Red Bull Racing Fanpage. Dibuat untuk performa dan kesederhanaan modern.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
